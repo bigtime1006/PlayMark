@@ -1,5 +1,11 @@
 ## 项目概览
 
+文档索引：
+- 设计文档：`docs/Design.md`
+- 工作交接计划：`docs/Handover.md`
+- 架构文档：`docs/Architecture.md`
+- 需求增补记录：`docs/20250821新增需求.rtf`
+
 - **名称**: 秒记 / Highlight Marker
 - **平台**: iOS（主管理端）+ watchOS（记录端）
 - **核心价值**: 运动中一键标记“精彩瞬间”，赛后导出时间点清单用于剪辑/分析
@@ -107,7 +113,7 @@
 - Watch 端顶部显示当前 Profile 名称，四个按钮按颜色显示；点击即低时延打点
 
 
-## 视频导入与对齐剪辑流水线（规划）
+## 视频导入与对齐剪辑流水线（规划/现状）
 
 ### 目标
 - 从相册/文件导入运动视频，按会话打点生成剪辑片段，用于快速复盘/发布
@@ -151,15 +157,17 @@
 - M3 多文件导出；字幕叠加（烧录）
 - M4 批量处理多个会话；导出 FCPXML（与 NLE 对接）
 
-### 当前进度（本次提交）
+### 当前进度（同步更新）
 - 需求确认：已确认先做视频流水线，心率不纳入
 - 代码准备：
   - 会话与打点数据已具备（含绝对时间 `createdAt`）
   - iPhone UI/数据流可复用；后续新增 Video 模块（`VideoPipeline/VideoEditor.swift`、`VideoViews/VideoImportView.swift` 等）
-- 待实现（下一步）：
-  1) 创建 `VideoPipeline` 模块与占位实现（时间映射、range 计算、SRT 生成）
-  2) 新增“视频”页与导入/对齐 UI，接入会话选择器
-  3) 生成片段预览并导出合并 MP4 + SRT（MVP）
+- 已实现：
+  - 片段计算与重叠合并（`VideoPipeline.swift`）
+  - 合并 MP4 导出、可选烧录字幕（`VideoExporter.swift`）
+  - SRT 生成导出（`VideoExporter.generateSRT`）
+  - UI：选择会话/视频、对齐、片段参数、预览与导出（`VideoImportView.swift`）
+
 
 ### 风险与性能
 - 长视频内多片段截取的 IO 压力与内存占用
