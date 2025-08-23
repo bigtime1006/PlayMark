@@ -16,6 +16,13 @@
 - TagProfiles：标签/颜色 Profile 管理与“立即同步到手表”（`TagProfiles.swift`）
 - Views：主页、历史/回收站、详情/编辑、标签编辑、视频导入对齐（SwiftUI）
 - Video：片段计算（`VideoPipeline.swift`）、导出器（`VideoExporter.swift`）、导入对齐 UI（`VideoImportView.swift`）
+  - VideoImportView：
+    - 读取 `AVAsset` 视频开始/时长/结束（若可获得），展示于“视频信息与校验”
+    - 将 `RecordSession.startedAt/endedAt`（或最后高光绝对时间）与视频区间对比，提示覆盖状态
+    - 计算建议对齐锚点：
+      - start→video：`session.startedAt - video.start`
+      - firstMark→video：`(session.startedAt + firstHighlight.timestamp) - video.start`
+    - 提供按钮一键写入建议偏移
 
 ### 模块划分（watchOS）
 - WatchSessionStore：手表会话状态、发送到 iPhone、最近活动编辑与撤销（`WatchSessionStore.swift`）
@@ -36,7 +43,7 @@
    - 手表收到后落盘到 `UserDefaults`，离线可用
 
 4) 视频导出
-   - 选择视频与会话 → 设定对齐（会话开始/第一个标记 → 某视频时间）
+   - 选择视频与会话 → 显示视频信息与覆盖校验 → 设定对齐（会话开始/第一个标记 → 某视频时间，支持建议值一键填入）
    - `VideoPipeline.computeSegments()` 计算并合并片段区间
    - `VideoExporter.exportMergedMP4()` 合并导出（可选烧录字幕）；`generateSRT()` 生成字幕文件
 
