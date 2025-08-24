@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS 主页面 (HomeView) 样例</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PingFang+SC:wght@400;500;600&family=SF+Pro+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'PingFang SC', 'SF Pro Text', sans-serif;
+        }
+        /* 定义设计规范中的颜色 */
+        :root {
+            --pm-primary: #FF7A00;
+            --pm-background-light: #F9F9F9; 
+            --pm-background-dark: #000000;
+            --pm-surface-light: #FFFFFF; 
+            --pm-surface-dark: #1C1C1E;
+            --pm-text-light: #1C1C1E; 
+            --pm-text-dark: #FFFFFF;
+            --pm-muted-light: #6C757D; 
+            --pm-muted-dark: #8E8E93;
+            --pm-track-light: rgba(128, 128, 128, 0.2);
+            --pm-track-dark: rgba(128, 128, 128, 0.3);
+            --accent1: #007BFF;
+            --accent2: #20C997;
+            --accent3: #6F42C1;
+            --accent4: #FFC107;
+        }
+
+        /* Light Mode (Default) */
+        .bg-pm-background { background-color: var(--pm-background-light); }
+        .bg-pm-surface { background-color: var(--pm-surface-light); }
+        .text-pm-text { color: var(--pm-text-light); }
+        .text-pm-muted { color: var(--pm-muted-light); }
+        .text-pm-primary { color: var(--pm-primary); }
+        .text-pm-track { color: var(--pm-track-light); }
+        .border-pm { border-color: #E5E5EA; }
+        .text-accent1 { color: var(--accent1); } .border-accent1 { border-color: var(--accent1); }
+        .text-accent2 { color: var(--accent2); } .border-accent2 { border-color: var(--accent2); }
+        .text-accent3 { color: var(--accent3); } .border-accent3 { border-color: var(--accent3); }
+        .text-accent4 { color: var(--accent4); } .border-accent4 { border-color: var(--accent4); }
+
+        /* Dark Mode */
+        @media (prefers-color-scheme: dark) {
+            .bg-pm-background { background-color: var(--pm-background-dark); }
+            .bg-pm-surface { background-color: var(--pm-surface-dark); }
+            .text-pm-text { color: var(--pm-text-dark); }
+            .text-pm-muted { color: var(--pm-muted-dark); }
+            .text-pm-track { color: var(--pm-track-dark); }
+            .border-pm { border-color: #38383A; }
+        }
+    </style>
+</head>
+<body class="bg-pm-background">
+    <div class="max-w-sm mx-auto border border-gray-700 rounded-3xl shadow-lg overflow-hidden">
+        <div class="h-screen flex flex-col bg-pm-background">
+            <!-- 自定义 Header -->
+            <header class="flex items-center justify-between px-4 pt-3 pb-2 flex-shrink-0">
+                <div class="w-1/4"></div>
+                <div class="w-1/2 text-center">
+                    <button class="inline-flex items-center gap-1">
+                        <span class="text-pm-text font-bold text-lg">足球运动</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-pm-text font-semibold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="w-1/4 flex justify-end items-center gap-4">
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pm-text" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h5M20 20v-5h-5M4 20h5v-5M20 4h-5v5" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 4h5v5M9 20H4v-5M15 20h5v-5M9 4H4v5" />
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.65 6.35A7.958 7.958 0 0012 4c-4.42 0-8 3.58-8 8s3.58 8 8 8a7.958 7.958 0 005.65-2.35" />
+                            <path d="M12 8v4l2 1" />
+                        </svg>
+                    </button>
+                    <button>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-pm-text" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Dashboard -->
+            <main class="flex-grow p-4 pt-2">
+                <div class="space-y-3">
+                    <!-- Card 1: 标记瞬间 -->
+                    <a href="#" class="flex items-center gap-3 pl-0 pr-3.5 py-3.5 bg-pm-surface rounded-2xl overflow-hidden border-l-4 border-accent1">
+                        <div class="w-7 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent1" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 01-1-1V6z" clip-rule="evenodd" />
+                            </svg>
+                        </div>
+                        <div class="flex-grow">
+                            <p class="font-semibold text-pm-text text-lg">标记瞬间</p>
+                            <p class="text-sm text-pm-muted">开始/停止/标记 · 实时清单</p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pm-track" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+
+                    <!-- Card 2: 记录管理 -->
+                    <a href="#" class="flex items-center gap-3 pl-0 pr-3.5 py-3.5 bg-pm-surface rounded-2xl overflow-hidden border-l-4 border-accent2">
+                        <div class="w-7 flex items-center justify-center">
+                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12H6.5A2.5 2.5 0 014 9.5v0A2.5 2.5 0 016.5 7H9" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12h2.5a2.5 2.5 0 002.5-2.5v0a2.5 2.5 0 00-2.5-2.5H15" />
+                            </svg>
+                        </div>
+                        <div class="flex-grow">
+                            <p class="font-semibold text-pm-text text-lg">记录管理</p>
+                            <p class="text-sm text-pm-muted">浏览与编辑历史记录</p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pm-track" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+
+                    <!-- Card 3: 视频处理 -->
+                    <a href="#" class="flex items-center gap-3 pl-0 pr-3.5 py-3.5 bg-pm-surface rounded-2xl overflow-hidden border-l-4 border-accent3">
+                        <div class="w-7 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7 4v16M17 4v16M3 8h4m10 0h4M3 12h18M3 16h4m10 0h4M4 20h16a1 1 0 001-1V5a1 1 0 00-1-1H4a1 1 0 00-1 1v14a1 1 0 001 1z" />
+                            </svg>
+                        </div>
+                        <div class="flex-grow">
+                            <p class="font-semibold text-pm-text text-lg">视频处理</p>
+                            <p class="text-sm text-pm-muted">会话选择 · 视频导入 · 对齐与导出</p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pm-track" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+
+                    <!-- Card 4: 设置与同步 -->
+                    <a href="#" class="flex items-center gap-3 pl-0 pr-3.5 py-3.5 bg-pm-surface rounded-2xl overflow-hidden border-l-4 border-accent4">
+                        <div class="w-7 flex items-center justify-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                        </div>
+                        <div class="flex-grow">
+                            <p class="font-semibold text-pm-text text-lg">设置与同步</p>
+                            <p class="text-sm text-pm-muted">快速切换活动 · 同步到手表</p>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pm-track" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

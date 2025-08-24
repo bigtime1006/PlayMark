@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>watchOS 记录界面样例</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: sans-serif; background-color: black; }
+        .watch-screen {
+            width: 198px; /* 模拟 45mm Watch 尺寸 */
+            height: 242px;
+            border-radius: 28px;
+            background-color: black;
+            color: white;
+            overflow: hidden;
+        }
+        /* 标签强调色 */
+        .bg-accent1 { background-color: #007BFF; }
+        .bg-accent2 { background-color: #20C997; }
+        .bg-accent3 { background-color: #6F42C1; }
+        .bg-accent4 { background-color: #FFC107; }
+        .bg-pm-error { background-color: #DC3545; }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen">
+    <div class="watch-screen flex flex-col p-2">
+        <!-- 顶部信息 -->
+        <header class="flex-shrink-0 text-center py-1">
+            <p class="text-sm text-gray-400">足球运动</p>
+            <p class="text-2xl font-semibold">0:12:34.5</p>
+        </header>
+
+        <!-- 标签网格 -->
+        <main class="flex-grow grid grid-cols-2 grid-rows-2 gap-2 my-2">
+            <button class="bg-accent1 rounded-3xl text-lg font-semibold flex items-center justify-center">进球</button>
+            <button class="bg-accent2 rounded-3xl text-lg font-semibold flex items-center justify-center">助攻</button>
+            <button class="bg-accent3 rounded-3xl text-lg font-semibold flex items-center justify-center">失误</button>
+            <button class="bg-accent4 rounded-3xl text-lg font-semibold flex items-center justify-center">冲刺</button>
+        </main>
+
+        <!-- 底部操作 -->
+        <footer class="flex-shrink-0">
+            <button class="w-full h-12 bg-pm-error rounded-full text-lg font-bold">结束</button>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iOS 视频剪辑页样例</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'PingFang SC', sans-serif; }
+        :root {
+            --pm-primary: #FF7A00;
+            --pm-background-light: #F9F9F9; --pm-background-dark: #000000;
+            --pm-surface-light: #FFFFFF; --pm-surface-dark: #1C1C1E;
+            --pm-text-light: #000000; --pm-text-dark: #FFFFFF;
+            --pm-muted-light: #6C757D; --pm-muted-dark: #8E8E93;
+            --pm-success: #28A745;
+        }
+        .bg-pm-background { background-color: var(--pm-background-light); }
+        .bg-pm-surface { background-color: var(--pm-surface-light); }
+        .bg-pm-primary { background-color: var(--pm-primary); }
+        .text-pm-text { color: var(--pm-text-light); }
+        .text-pm-muted { color: var(--pm-muted-light); }
+        .text-on-primary { color: white; }
+        .border-pm { border-color: #E5E5EA; }
+        @media (prefers-color-scheme: dark) {
+            body { background-color: var(--pm-background-dark); }
+            .bg-pm-background { background-color: var(--pm-background-dark); }
+            .bg-pm-surface { background-color: var(--pm-surface-dark); }
+            .text-pm-text { color: var(--pm-text-dark); }
+            .text-pm-muted { color: var(--pm-muted-dark); }
+            .border-pm { border-color: #38383A; }
+        }
+    </style>
+</head>
+<body class="bg-pm-background">
+<div class="max-w-md mx-auto">
+    <header class="sticky top-0 bg-pm-background/80 backdrop-blur-sm z-10 py-3 text-center">
+        <h1 class="text-lg font-bold text-pm-text">视频剪辑</h1>
+    </header>
+
+    <div class="p-4 space-y-6">
+        <!-- Section 1: 来源选择 -->
+        <section class="space-y-2">
+            <h2 class="text-pm-muted font-semibold uppercase text-sm px-4">来源</h2>
+            <div class="bg-pm-surface rounded-xl">
+                <div class="p-4 flex justify-between items-center border-b border-pm">
+                    <span class="text-pm-text">会话</span>
+                    <span class="text-pm-muted">2025年8月23日 ></span>
+                </div>
+                <div class="p-4">
+                    <button class="w-full text-pm-primary font-semibold">从相册选择视频</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: 视频信息与校验 -->
+        <section class="space-y-2">
+            <h2 class="text-pm-muted font-semibold uppercase text-sm px-4">视频信息与校验</h2>
+            <div class="bg-pm-surface rounded-xl p-4 space-y-3 text-sm">
+                <div class="flex justify-between"><span class="text-pm-muted">文件名</span><span class="text-pm-text">IMG_1234.MOV</span></div>
+                <div class="flex justify-between"><span class="text-pm-muted">时长</span><span class="text-pm-text">01:30:15</span></div>
+                <div class="flex justify-between items-center">
+                    <span class="text-pm-muted">覆盖状态</span>
+                    <span class="text-white text-xs font-semibold bg-green-500 px-2 py-1 rounded-full" style="background-color: var(--pm-success);">会话完全覆盖视频</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: 对齐设置 -->
+        <section class="space-y-2">
+            <h2 class="text-pm-muted font-semibold uppercase text-sm px-4">对齐设置</h2>
+            <div class="bg-pm-surface rounded-xl">
+                <div class="p-4 border-b border-pm">
+                    <label class="text-pm-text">对齐基准</label>
+                    <select class="w-full bg-transparent text-right text-pm-muted border-none focus:ring-0">
+                        <option>第一个标记时间</option>
+                        <option>会话开始时间</option>
+                    </select>
+                </div>
+                <div class="p-4">
+                    <label class="text-pm-text">视频中的对齐时间</label>
+                    <input type="text" placeholder="mm:ss.s" class="w-full bg-transparent text-right text-pm-primary border-none focus:ring-0" value="00:15.3">
+                    <div class="text-right mt-1">
+                        <button class="text-xs text-pm-primary">使用建议值 (00:14.8)</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: 片段参数 -->
+        <section class="space-y-2">
+            <h2 class="text-pm-muted font-semibold uppercase text-sm px-4">片段参数</h2>
+            <div class="bg-pm-surface rounded-xl divide-y divide-border-pm">
+                <div class="p-4 flex justify-between items-center"><span class="text-pm-text">标记前</span><span class="text-pm-muted">3.0 秒</span></div>
+                <div class="p-4 flex justify-between items-center"><span class="text-pm-text">标记后</span><span class="text-pm-muted">5.0 秒</span></div>
+                <div class="p-4 flex justify-between items-center">
+                    <span class="text-pm-text">烧录字幕到视频</span>
+                    <input type="checkbox" class="toggle-checkbox" checked>
+                </div>
+                 <div class="p-4 flex justify-between items-center">
+                    <span class="text-pm-text">额外导出 .srt 文件</span>
+                    <input type="checkbox" class="toggle-checkbox">
+                </div>
+            </div>
+        </section>
+
+        <!-- 底部操作 -->
+        <footer class="pt-4 pb-8 space-y-4">
+            <button class="w-full h-12 bg-pm-surface text-pm-primary font-bold rounded-full text-lg">生成片段预览</button>
+            <button class="w-full h-12 bg-pm-primary text-on-primary font-bold rounded-full text-lg">导出视频</button>
+        </footer>
+    </div>
+</div>
+</body>
+</html>
