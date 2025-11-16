@@ -1,5 +1,5 @@
 项目支持邮件地址：bigtime_lee@hotmail.com
-
+2025-11-16 项目名称由 PlayMark 改为 HighlightMarker。
 ## 项目概览
 
 文档索引：
